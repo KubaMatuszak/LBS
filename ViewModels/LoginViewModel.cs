@@ -7,11 +7,7 @@ namespace LBS.ViewModels
 		[Required(ErrorMessage = "To pole jest wymagane!")]
 		[Display(Name = "Login")]
 		public string Username { get; set; }
-        [Required(ErrorMessage ="To pole jest wymagane!")]
-        [Display(Name ="Email")]
-        [DataType(DataType.EmailAddress)]
-        
-        public string Email { get; set; }
+       
         [DataType(DataType.Password)]
 		[Required(ErrorMessage = "To pole jest wymagane!")]
 		[Display(Name = "Hasło")]
