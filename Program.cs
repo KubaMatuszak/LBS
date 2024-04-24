@@ -16,6 +16,7 @@ options =>
 	options.Password.RequiredLength = 8;
 	options.Password.RequireNonAlphanumeric = false;
 	options.Password.RequireLowercase = false;
+	
 }
 	).AddEntityFrameworkStores<UsersDbContext>().AddDefaultTokenProviders();
 var app = builder.Build();
