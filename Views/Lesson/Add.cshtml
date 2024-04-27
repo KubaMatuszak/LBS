@@ -1,0 +1,39 @@
+﻿@model LBS.ViewModels.LessonViewModel
+@{
+	ViewData["Title"] = "Zapisz się na zajęcia!";
+}
+<div class="row d-flex align-items-center justify-content-center">
+	<h2 class=" = " text-center text-info>Zapisz się na zajęcia!</h2>
+	<form asp-action="Add" method="post">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="mb-1">
+			<label asp-for="LessonLength"></label>
+			<select asp-for="LessonLength" class="form-control">
+				<option value=30>30</option>
+				<option value=60>45</option>
+				<option value=60>60</option>
+			</select>
+			
+			<span asp-validation-for="LessonLength" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="LessonDate"></label>
+			<input asp-for="LessonDate" class="form-control" />
+			<span asp-validation-for="LessonDate" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="LessonTime"></label>
+			<input asp-for="LessonTime" class="form-control" />
+			<span asp-validation-for="LessonTime" class="text-danger"></span>
+		</div>
+			<div class="col-4">
+				<input type="submit" value="Zapisz się!" class="btn btn-primary btn-sm float-end" />
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
