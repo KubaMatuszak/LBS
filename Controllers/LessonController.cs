@@ -43,7 +43,14 @@ namespace LBS.Controllers
 			_context.Add(lesson);
 			_context.SaveChanges();
 
-			return View();
+			return RedirectToAction("MyLessons");
+		}
+		public async Task<IActionResult> MyLessons()
+		{
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            LBSUser loggeduser = await _userManager.FindByIdAsync(userId);
+            var lessons = _context.lessons.Where(x=>x.StudentFirstName==loggeduser.FirstName&&x.StudentLastName==loggeduser.LastName).ToList();
+			return View(lessons);
 		}
 	}
 }

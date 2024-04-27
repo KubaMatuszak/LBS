@@ -26,7 +26,7 @@ namespace LBS.Controllers
 				var result = await _signInManager.PasswordSignInAsync(model.Username!, model.Password!, model.RememberMe, false);
 				if (result.Succeeded)
 				{
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Mylessons", "Lesson");
 				}
 				else
 				{
@@ -59,7 +59,7 @@ namespace LBS.Controllers
 				if (result.Succeeded)
 				{
 					await _signInManager.SignInAsync(user, false);
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("MyLessons", "Lesson");
 				}
 				foreach (var error in result.Errors)
 				{
@@ -71,7 +71,7 @@ namespace LBS.Controllers
 		public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("MyLessons", "Lesson");
 		}
 	}
 }

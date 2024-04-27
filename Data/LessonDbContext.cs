@@ -8,6 +8,6 @@ namespace LBS.Data
 		public LessonDbContext(DbContextOptions options) : base(options)
 		{
 		}
-		DbSet<Lesson> lessons { get; set; }
+		public DbSet<Lesson> lessons { get; set; }
 	}
 }

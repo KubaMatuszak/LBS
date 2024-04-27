@@ -1,0 +1,9 @@
+﻿@model List<Lesson>
+<h1> Twoje zajęcia!</h1>
+<ul>
+	@foreach(var item in Model)
+	{
+		<li>@item.LessonDate @item.LessonTime @item.LessonLength min</li>
+	
+	}
+</ul>
