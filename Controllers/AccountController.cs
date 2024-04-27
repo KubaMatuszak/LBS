@@ -9,12 +9,12 @@ namespace LBS.Controllers
 	{
 		private readonly SignInManager<LBSUser> _signInManager;
 		private readonly UserManager<LBSUser> _userManager;
-        public AccountController(SignInManager<LBSUser> signInManager, UserManager<LBSUser> userManager)
-        {
-            _signInManager = signInManager;
+		public AccountController(SignInManager<LBSUser> signInManager, UserManager<LBSUser> userManager)
+		{
+			_signInManager = signInManager;
 			_userManager = userManager;
-        }
-        public IActionResult Login()
+		}
+		public IActionResult Login()
 		{
 			return View();
 		}
@@ -35,8 +35,8 @@ namespace LBS.Controllers
 				}
 			}
 			return View();
-			
-			
+
+
 		}
 		public IActionResult Register()
 		{
@@ -45,23 +45,23 @@ namespace LBS.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Register(RegisterViewModel model)
 		{
-			if(ModelState.IsValid) 
+			if (ModelState.IsValid)
 			{
 				LBSUser user = new()
 				{
 					FirstName = model.FirstName,
 					LastName = model.LastName,
 					Email = model.Email,
-					UserName=model.Username
+					UserName = model.Username
 
 				};
-				var result = await _userManager.CreateAsync(user,model.Password!);
+				var result = await _userManager.CreateAsync(user, model.Password!);
 				if (result.Succeeded)
 				{
 					await _signInManager.SignInAsync(user, false);
 					return RedirectToAction("Index", "Home");
 				}
-				foreach (var error in result.Errors) 
+				foreach (var error in result.Errors)
 				{
 					ModelState.AddModelError("", error.Description);
 				}

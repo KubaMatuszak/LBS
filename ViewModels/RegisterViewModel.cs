@@ -20,6 +20,7 @@ namespace LBS.ViewModels
 		[DataType(DataType.Password)]
 		[Display(Name = "Hasło")]
 		public string Password { get; set; }
+		[Required(ErrorMessage ="To pole jest wymagane")]
         [Compare("Password", ErrorMessage = "Hasła nie są takie same")]
         [Display(Name ="Potwierdź hasło")]
 		[DataType(DataType.Password)]
