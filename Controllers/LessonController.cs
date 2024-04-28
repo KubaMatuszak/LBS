@@ -49,8 +49,13 @@ namespace LBS.Controllers
 		{
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             LBSUser loggeduser = await _userManager.FindByIdAsync(userId);
-            var lessons = _context.lessons.Where(x=>x.StudentFirstName==loggeduser.FirstName&&x.StudentLastName==loggeduser.LastName).ToList();
-			return View(lessons);
+			if (loggeduser.UserName!="Admin")
+			{
+				var lessons = _context.lessons.Where(x => x.StudentFirstName == loggeduser.FirstName && x.StudentLastName == loggeduser.LastName).ToList();
+				return View(lessons);
+			}
+            var adminlessons = _context.lessons.ToList();
+			return View(adminlessons);
 		}
 		[HttpGet]
 		public IActionResult Edit(int id)
