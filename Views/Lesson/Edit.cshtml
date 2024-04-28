@@ -1,15 +1,41 @@
-﻿@model LBS.Models.Lesson
+﻿@using LBS.AdminSettings
+@model LBS.Models.Lesson
 
-<h1>Edytuj zajęcia</h1>
-<form asp-action="Edit">
-	<input type="hidden" asp-for="Id" />
-	<div>
-		<label asp-for="LessonTime"></label>
-		<input asp-for="LessonTime" />
-		<label asp-for="LessonDate"></label>
-		<input asp-for="LessonDate" />
-		<label asp-for="LessonLength"></label>
-		<input asp-for="LessonLength" />
-	</div>
-	<button type="submit">Zapisz zmiany</button>
-</form>
+@{
+	ViewData["Title"] = "Edytuj lekcje!";
+}
+<div class="row d-flex align-items-center justify-content-center">
+	<h2 class="text-center text-info">Edytuj lekcje!</h2>
+	<form asp-action="Edit" method="post">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="mb-1">
+			<label asp-for="LessonLength"></label>
+			<select asp-for="LessonLength" class="form-control">
+				<option value=30>30</option>
+				<option value=60>45</option>
+				<option value=60>60</option>
+			</select>
+
+			<span asp-validation-for="LessonLength" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="LessonDate"></label>
+			<input asp-for="LessonDate" class="form-control" min="@DateOnly.FromDateTime(DateTime.Now).AddDays(1).ToString("yyyy-MM-dd")" title="Wybierz późniejszą date" />
+			<span asp-validation-for="LessonDate" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="LessonTime"></label>
+			<input asp-for="LessonTime" class="form-control" min="@AdminSettings.minTime" title="Nauczyciel nie pracuje w tych godzinach" max="@AdminSettings.maxTime" />
+			<span asp-validation-for="LessonTime" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<input type="submit" value="Edytuj" class="btn btn-primary btn-sm float-end" />
+		</div>
+	</form>
+</div>
+</div>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

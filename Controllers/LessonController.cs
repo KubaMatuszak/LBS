@@ -40,6 +40,11 @@ namespace LBS.Controllers
 				StudentLastName = loggeduser.LastName
 
 			};
+			if(lesson.LessonDate.DayOfWeek.ToString()=="Saturday" || lesson.LessonDate.DayOfWeek.ToString() == "Sunday")
+			{
+				ModelState.AddModelError("", "Nauczyciel nie pracuje w wybrany dzień");
+				return View(vmodel);
+			}
 			_context.Add(lesson);
 			_context.SaveChanges();
 
@@ -49,6 +54,8 @@ namespace LBS.Controllers
 		{
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             LBSUser loggeduser = await _userManager.FindByIdAsync(userId);
+			
+			
 			if (loggeduser.UserName!="Admin")
 			{
 				var lessons = _context.lessons.Where(x => x.StudentFirstName == loggeduser.FirstName && x.StudentLastName == loggeduser.LastName).ToList();

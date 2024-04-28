@@ -1,0 +1,27 @@
+﻿@model LBS.ViewModels.AdminSettingsViewModel
+<div class="row d-flex align-items-center justify-content-center">
+	<h2 class="text-center text-info">Podaj swoją dostępność</h2>
+	<form asp-action="Avaliable" method="post">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		<div class="mb-1">
+			<label asp-for="minTime"></label>
+			<input asp-for="minTime" class="form-control" />
+			<span asp-validation-for="minTime" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<label asp-for="maxTime"></label>
+			<input asp-for="maxTime" class="form-control" />
+			<span asp-validation-for="maxTime" class="text-danger"></span>
+		</div>
+		<div class="mb-1">
+			<input type="submit" value="Zmień dostępność" class="btn btn-primary btn-sm float-end" />
+		</div>
+	</form>
+</div>
+</div>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

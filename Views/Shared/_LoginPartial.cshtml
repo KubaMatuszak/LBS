@@ -13,6 +13,14 @@
 						Wyloguj
 					</a>
 				</li>
+				@if(User.Identity.Name=="Admin")
+				{
+					<li>
+						<a class="dropdown-item" asp-action="Avaliable" asp-controller="Admin">
+							Ustaw dostępność
+						</a>
+					</li>
+				}
 			</ul>
 		</li>
 	}

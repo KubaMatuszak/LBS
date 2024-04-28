@@ -10,6 +10,7 @@ namespace LBS.ViewModels
 		public string StudentLastName { get; set; }
 		[Required(ErrorMessage ="Pole jest wymagane")]
 		[DataType(DataType.Date)]
+		
 		[Display(Name ="Data zajęć")]
 		
 		public DateOnly LessonDate { get; set; }

@@ -1,11 +1,16 @@
 ﻿@model List<Lesson>
 <h1> Twoje zajęcia!</h1>
-<ul>
+<ul class="list-group">
 	@foreach(var item in Model)
 	{
-		<li>@item.LessonDate @item.LessonTime @item.LessonLength min 
-			<a href="@Url.Action("Edit", "Lesson", new { id = item.Id })">Edytuj</a>
-			<a href="@Url.Action("Delete", "Lesson", new { id = item.Id })">Usuń</a>
+		<li class="list-group-item"><h6>@item.LessonDate @item.LessonTime @item.LessonLength min</h6>
+
+
+			
+			<a href="@Url.Action("Edit", "Lesson", new { id = item.Id })" class="btn btn-warning">Edytuj</a>
+
+
+			<a href="@Url.Action("Delete", "Lesson", new { id = item.Id })" class="btn btn-danger">Usuń</a>
 
 		</li>
 	
