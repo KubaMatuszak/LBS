@@ -3,7 +3,11 @@
 <ul>
 	@foreach(var item in Model)
 	{
-		<li>@item.LessonDate @item.LessonTime @item.LessonLength min</li>
+		<li>@item.LessonDate @item.LessonTime @item.LessonLength min 
+			<a href="@Url.Action("Edit", "Lesson", new { id = item.Id })">Edytuj</a>
+			<a href="@Url.Action("Delete", "Lesson", new { id = item.Id })">Usuń</a>
+
+		</li>
 	
 	}
 </ul>

@@ -52,5 +52,31 @@ namespace LBS.Controllers
             var lessons = _context.lessons.Where(x=>x.StudentFirstName==loggeduser.FirstName&&x.StudentLastName==loggeduser.LastName).ToList();
 			return View(lessons);
 		}
+		[HttpGet]
+		public IActionResult Edit(int id)
+		{
+			var lesson = _context.lessons.Find(id);
+			return View(lesson);
+
+		}
+		[HttpPost]
+		public async Task<IActionResult> Edit (Lesson lesson)
+		{
+			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			LBSUser loggeduser = await _userManager.FindByIdAsync(userId);
+			lesson.StudentLastName = loggeduser.FirstName;
+			lesson.StudentFirstName = loggeduser.FirstName;
+			_context.lessons.Update(lesson);
+			await _context.SaveChangesAsync();
+			return RedirectToAction("MyLessons");
+		}
+		[HttpGet]
+		public IActionResult Delete (int id) 
+		{
+			var item = _context.lessons.Find(id);
+			_context.lessons.Remove(item);
+			_context.SaveChanges();
+			return RedirectToAction("MyLessons");
+		}
 	}
 }
