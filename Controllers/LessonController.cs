@@ -45,6 +45,19 @@ namespace LBS.Controllers
 				ModelState.AddModelError("", "Nauczyciel nie pracuje w wybrany dzień");
 				return View(vmodel);
 			}
+			var dates = _context.lessons.ToList();
+			foreach (var date in dates)
+			{
+				if (date.LessonDate == lesson.LessonDate)
+				{
+					if (date.LessonTime == lesson.LessonTime || Math.Abs((date.LessonTime - lesson.LessonTime).TotalMinutes) < lesson.LessonLength)
+					{
+						ModelState.AddModelError("", "Termin jest już zajęty");
+						return View(vmodel);
+					}
+
+				}
+			}
 			_context.Add(lesson);
 			_context.SaveChanges();
 
@@ -67,6 +80,7 @@ namespace LBS.Controllers
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{
+
 			var lesson = _context.lessons.Find(id);
 			return View(lesson);
 
@@ -74,6 +88,12 @@ namespace LBS.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit (Lesson lesson)
 		{
+			if (lesson.LessonDate.DayOfWeek.ToString() == "Saturday" || lesson.LessonDate.DayOfWeek.ToString() == "Sunday")
+			{
+				ModelState.AddModelError("", "Nauczyciel nie pracuje w wybrany dzień");
+				return View(lesson);
+			}
+			
 			string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 			LBSUser loggeduser = await _userManager.FindByIdAsync(userId);
 			lesson.StudentLastName = loggeduser.FirstName;

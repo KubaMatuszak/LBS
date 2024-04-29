@@ -20,7 +20,7 @@
 		</div>
 		<div class="mb-1">
 			<label asp-for="LessonDate"></label>
-			<input asp-for="LessonDate" class="form-control" min="@DateOnly.FromDateTime(DateTime.Now).AddDays(1).ToString("yyyy-MM-dd")" title="Wybierz późniejszą date" />
+			<input asp-for="LessonDate" class="form-control" min="@DateOnly.FromDateTime(DateTime.Now).AddDays(1).ToString("yyyy-MM-dd")" title="Wybierz późniejszą date"/>
 			<span asp-validation-for="LessonDate" class="text-danger"></span>
 		</div>
 		<div class="mb-1">

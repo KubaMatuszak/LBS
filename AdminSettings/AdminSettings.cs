@@ -6,5 +6,6 @@
         public static TimeOnly maxTime = new TimeOnly(21, 00, 00);
         
         
+        
     }
 }
